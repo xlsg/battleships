@@ -14,7 +14,7 @@ Ship::ShipSegment* Playfield::PlayfieldCell::getSegment() {
     return this->segment;
 }
 
-Playfield::Playfield(int size_x, int size_y) {
+Playfield::Playfield(int size_x, int size_y):size_x{size_x}, size_y{size_y}{
     size_x = (size_x > MINIMAL_FIELD_SIZE) ? size_x : MINIMAL_FIELD_SIZE;
     size_y = (size_y > MINIMAL_FIELD_SIZE) ? size_y : MINIMAL_FIELD_SIZE;
     for (int i = 0; i < size_x; i++) {
