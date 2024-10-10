@@ -26,7 +26,7 @@ Playfield::Playfield(int size_x, int size_y) {
     }
 }
 
-void Playfield::pushShip(std::pair<int, int> coord, Ship* push_ship, Orientation orientation) { // должна быть првоерка на наличе других кораблей в зоне поставки
+void Playfield::pushShip(std::pair<int, int> coord, Ship* push_ship, Orientation orientation) {
     if (this->play_field.size() < coord.first || coord.first < 0 || this->play_field[0].size() < coord.second || coord.second < 0 || (*push_ship).getSize() == 0 || this->play_field.size() < (coord.first + (*push_ship).getSize()) || this->play_field[0].size() < (coord.second + (*push_ship).getSize())) {
         return;
     }
@@ -48,6 +48,11 @@ void Playfield::pushShip(std::pair<int, int> coord, Ship* push_ship, Orientation
 void Playfield::hit(std::pair<int, int> coord) {
     if (this->play_field[coord.first][coord.second].getCellStatus() == PlayfieldCellCondition::ship_segment)
         this->play_field[coord.first][coord.second].getSegment()->takeDamage();
+}
+
+Playfield::Playfield(const Playfield& copy){
+    size_x = copy.size_x;
+    size_y = copy.size_y;
 }
 
 Playfield::Playfield(Playfield&& moved){
