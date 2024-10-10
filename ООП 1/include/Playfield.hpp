@@ -29,6 +29,8 @@ private:
     };
 
     std::vector<std::vector<PlayfieldCell>> play_field;
+    int size_x;
+    int size_y;
 public:
     Playfield(int size_x, int size_y);
 
