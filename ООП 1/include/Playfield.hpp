@@ -32,7 +32,7 @@ private:
     int size_x;
     int size_y;
 public:
-    Playfield(int size_x, int size_y);
+    Playfield(int x, int y);
 
     void pushShip(std::pair<int, int> coord, Ship* push_ship, Orientation orientation);
 
