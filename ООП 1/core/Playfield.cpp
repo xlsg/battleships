@@ -14,13 +14,13 @@ Ship::ShipSegment* Playfield::PlayfieldCell::getSegment() {
     return this->segment;
 }
 
-Playfield::Playfield(int size_x, int size_y):size_x{size_x}, size_y{size_y}{
-    size_x = (size_x > MINIMAL_FIELD_SIZE) ? size_x : MINIMAL_FIELD_SIZE;
-    size_y = (size_y > MINIMAL_FIELD_SIZE) ? size_y : MINIMAL_FIELD_SIZE;
-    for (int i = 0; i < size_x; i++) {
+Playfield::Playfield(int x, int y):size_x{size_x}, size_y{size_y}{
+    x = (x > MINIMAL_FIELD_SIZE) ? x : MINIMAL_FIELD_SIZE;
+    y = (y > MINIMAL_FIELD_SIZE) ? y : MINIMAL_FIELD_SIZE;
+    for (int i = 0; i < x; i++) {
         std::vector<PlayfieldCell> line;
         play_field.push_back(line);
-        for (int j = 0; j < size_y; j++) {
+        for (int j = 0; j < y; j++) {
             play_field[i].push_back(PlayfieldCell());
         }
     }
