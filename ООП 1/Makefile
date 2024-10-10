@@ -1,19 +1,26 @@
-CC = g++
-CFLAGS = -Wall -g
+TARGET = cw
+CC = gcc
 
-TARGET = oop
+SOURCE = ./core/
+HEADER = ./include/
+BIN = ./bin/
 
-SRCS = Ship.cpp ShipManager.cpp Playfield.cpp main.cpp
+CFLAGS = -Wall -std=gnu99 -I$(HEADER)
 
-OBJS = $(SRCS:.cpp=.o)
+SRC = $(wildcard $(SOURCE)*.c)
+OBJ = $(patsubst $(SOURCE)%.c, $(BIN)%.o, $(SRC))
 
-all: $(TARGET)
+all : create_bin_folder $(TARGET)
 
-$(TARGET): $(OBJS)
-	$(CC) -o $@ $^
+$(TARGET) : $(OBJ)
+	@$(CC) $(CFLAGS) $^ -o $@
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $<
+$(BIN)%.o : $(SOURCE)%.c 
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+create_bin_folder :
+	@mkdir -p $(BIN)
 
 clean:
-	rm -f $(TARGET) $(OBJS)
+	@rm $(TARGET)
+	@rm -rf $(BIN)
