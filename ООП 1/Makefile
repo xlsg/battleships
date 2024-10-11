@@ -1,26 +1,24 @@
-TARGET = cw
-CC = gcc
+CXX = g++
 
-SOURCE = ./core/
-HEADER = ./include/
-BIN = ./bin/
+CXXFLAGS = -Iinclude -Wall -Wextra -O2
 
-CFLAGS = -Wall -std=gnu99 -I$(HEADER)
+SRC_DIR = core
+INCLUDE_DIR = include
+OBJ_DIR = obj
 
-SRC = $(wildcard $(SOURCE)*.c)
-OBJ = $(patsubst $(SOURCE)%.c, $(BIN)%.o, $(SRC))
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 
-all : create_bin_folder $(TARGET)
+TARGET = my_program
 
-$(TARGET) : $(OBJ)
-	@$(CC) $(CFLAGS) $^ -o $@
+all: $(TARGET)
 
-$(BIN)%.o : $(SOURCE)%.c 
-	@$(CC) $(CFLAGS) -c $< -o $@
+$(TARGET): $(OBJS)
+	$(CXX) -o $@ $^
 
-create_bin_folder :
-	@mkdir -p $(BIN)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	@rm $(TARGET)
-	@rm -rf $(BIN)
+	rm -rf $(OBJ_DIR)/*.o $(TARGET)
